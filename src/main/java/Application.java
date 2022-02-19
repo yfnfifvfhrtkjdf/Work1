@@ -15,7 +15,7 @@ public class Application {
         kotic2.setWalk(2);
         kotic2.setWash(0);
         kotic2.setHunt(5);
-       kotic2.liveAnotherDay();
+       kotic2.liveAnotherDay(kotic2.getGo());
         compareVoice(kotic1, kotic2);
         System.out.println("Количество котиков " + Kotik.getCount());
         System.out.println("Второго котика зовут "+ kotic2.getName()+" его вес " + kotic2.getWeight());
@@ -27,4 +27,3 @@ public class Application {
         return true;
     }
 }
-
