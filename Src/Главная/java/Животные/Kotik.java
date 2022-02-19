@@ -77,7 +77,8 @@ public class Kotik {
         setPlay(play);
         if (play > 0) {
             play--;
-            System.out.println("Котик наигрался. Действие выполнено  " + " уровень игривости: " + play);
+            satiety--;
+            System.out.println("Котик наигрался. Действие выполнено  " + " уровень игривости: " + play+ " уровень сытости " + satiety);
             return true;
         } else {
             System.out.println("Котик хочет играть ");
@@ -88,7 +89,8 @@ public class Kotik {
         setSleep(sleep);
         if (sleep > 0) {
             sleep--;
-            System.out.println("Котик выспался. Действие выполнено. уровень сытости: " + sleep);
+            satiety--;
+            System.out.println("Котик выспался. Действие выполнено. уровень сытости: " + sleep + " уровень сытости " + satiety);
             return true;
         } else {
             System.out.println("Котик хочет спать ");
@@ -100,7 +102,8 @@ public class Kotik {
         setWash(wash);
         if (wash > 0) {
             wash--;
-            System.out.println("Котик умытый. Действие выполнено  " + " уровень умытости: " + wash);
+            satiety--;
+            System.out.println("Котик умытый. Действие выполнено  " + " уровень умытости: " + wash+ " уровень сытости " + satiety);
             return true;
         } else {
             System.out.println("Котик неумытый ");
@@ -112,7 +115,8 @@ public class Kotik {
         setWalk(walk);
         if (walk > 0) {
             walk--;
-            System.out.println("Котик нагулялся. Действие выполнено  " + " уровень нагуленности: " + walk);
+            satiety--;
+            System.out.println("Котик нагулялся. Действие выполнено  " + " уровень нагуленности: " + walk+ " уровень сытости " + satiety);
         return  true;
         } else {
             System.out.println("котик хочет гулять ");
@@ -124,7 +128,8 @@ public class Kotik {
         setHunt(hunt);
         if (hunt > 0) {
             hunt--;
-            System.out.println("Котик наохотился " + " уровень охотничества " + hunt);
+            satiety--;
+            System.out.println("Котик наохотился " + " уровень охотничества " + hunt+ " уровень сытости " + satiety);
         return  true;
         } else {
             System.out.println("Котик хочет охотиться ");
@@ -133,10 +138,15 @@ public class Kotik {
 
     }
     public boolean eat(int satiety, int s2) {
-        this.satiety = satiety;
         satiety += s2;
-        System.out.println(satiety);
-        return true;
+        this.satiety = satiety;
+        if (satiety>0) {
+            this.satiety = satiety;
+            System.out.println("котик поел. Сытость: " + satiety);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public boolean eat( int satiety,String eda) {
@@ -145,9 +155,9 @@ public class Kotik {
         System.out.println(eda +satiety);
         return true;
     }
-
     public boolean eat() {
         this.eda = eda;
+        this.satiety = satiety;
         eat(satiety, eda);
         return  true;
     }
@@ -156,7 +166,7 @@ public class Kotik {
     public String getGo () {return  go;}
     public void setGo () {this.go=go;}
 
-    public void liveAnotherDay() {
+    public void liveAnotherDay(String go) {
         int number;
         int rand = (int) (Math.random() * 5) + 1;
         for (number = 0; number <24; number++){
@@ -164,27 +174,33 @@ public class Kotik {
                 case 1:
                     play();
                     number++;
-                    System.out.println(number + " - Играл");
+                    go=number + " - Играл";
+                    System.out.println(go);
                 case 2:
                     sleep();
                     number++;
-                    System.out.println(number + " - Спал");
+                    go=number + " - Спал";
+                    System.out.println(go);
                 case 3:
                     wash();
                     number++;
-                    System.out.println(number + " - Умывался");
+                    go=number + " - Умывался";
+                    System.out.println(go);
                 case 4:
                     walk();
                     number++;
-                    System.out.println(number + " - Гулял");
+                    go=number + " - Гулял";
+                    System.out.println(go);
                 case 5:
                     hunt();
                     number++;
-                    System.out.println(number + " - Охотился");
+                    go=number + " - Охотился";
+                    System.out.println(go);
                 default:
                     number++;
                     satiety++;
-                    System.out.println(number + " - Ел "+ eda + " сытость " + satiety);
+                    go=number + " - Ел "+ eda + " сытость " + satiety;
+                    System.out.println(go);
 break;
             }
         }
